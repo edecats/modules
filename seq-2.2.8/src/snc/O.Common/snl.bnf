@@ -1,0 +1,279 @@
+// Reprint of input file "../snl.lem".
+// Symbols:
+//   0 $                 53 SYNC             106 monitor         
+//   1 EQUAL             54 SYNCQ            107 sync            
+//   2 ADDEQ             55 INTCON           108 syncq           
+//   3 SUBEQ             56 RBRACKET         109 declaration     
+//   4 ANDEQ             57 CONST            110 option          
+//   5 OREQ              58 FOREIGN          111 c_code          
+//   6 DIVEQ             59 CHAR             112 funcdef         
+//   7 MULEQ             60 SHORT            113 structdef       
+//   8 MODEQ             61 INT              114 final_defn      
+//   9 LSHEQ             62 LONG             115 variable        
+//  10 RSHEQ             63 UNSIGNED         116 to              
+//  11 XOREQ             64 INT8T            117 subscript       
+//  12 QUESTION          65 UINT8T           118 strings         
+//  13 COLON             66 INT16T           119 opt_subscript   
+//  14 OROR              67 UINT16T          120 event_flag      
+//  15 ANDAND            68 INT32T           121 syncq_size      
+//  16 VBAR              69 UINT32T          122 basetype        
+//  17 CARET             70 FLOAT            123 init_declarators
+//  18 AMPERSAND         71 DOUBLE           124 init_declarator 
+//  19 EQ                72 STRING           125 declarator      
+//  20 NE                73 EVFLAG           126 init_expr       
+//  21 GT                74 VOID             127 param_decls     
+//  22 GE                75 ENUM             128 param_decl      
+//  23 LE                76 STRUCT           129 type_expr       
+//  24 LT                77 UNION            130 variables       
+//  25 LSHIFT            78 TYPENAME         131 init_exprs      
+//  26 RSHIFT            79 OPTION           132 expr            
+//  27 ADD               80 SS               133 prim_type       
+//  28 SUB               81 STATE            134 abs_decl        
+//  29 ASTERISK          82 ENTRY            135 option_value    
+//  30 SLASH             83 EXIT             136 state_set       
+//  31 MOD               84 WHEN             137 ss_defns        
+//  32 NOT               85 BREAK            138 states          
+//  33 TILDE             86 CONTINUE         139 ss_defn         
+//  34 INCR              87 RETURN           140 state           
+//  35 DECR              88 IF               141 state_defns     
+//  36 SIZEOF            89 ELSE             142 transitions     
+//  37 PRE               90 WHILE            143 state_defn      
+//  38 LBRACKET          91 FOR              144 block           
+//  39 LPAREN            92 FPCON            145 transition      
+//  40 POINTER           93 STRCON           146 condition       
+//  41 PERIOD            94 CCODE            147 opt_expr        
+//  42 POST              95 error            148 block_defns     
+//  43 PROGRAM           96 program          149 statements      
+//  44 NAME              97 program_param    150 block_defn      
+//  45 RPAREN            98 initial_defns    151 statement       
+//  46 ASSIGN            99 entry            152 comma_expr      
+//  47 SEMICOLON        100 state_sets       153 for_statement   
+//  48 LBRACE           101 exit             154 args            
+//  49 RBRACE           102 final_defns      155 member          
+//  50 TO               103 string           156 members         
+//  51 COMMA            104 initial_defn     157 member_decls    
+//  52 MONITOR          105 assign           158 member_decl     
+program ::= PROGRAM NAME program_param initial_defns entry state_sets exit final_defns.
+program_param ::= LPAREN string RPAREN.
+program_param ::=.
+initial_defns ::= initial_defns initial_defn.
+initial_defns ::=.
+initial_defn ::= assign.
+initial_defn ::= monitor.
+initial_defn ::= sync.
+initial_defn ::= syncq.
+initial_defn ::= declaration.
+initial_defn ::= option.
+initial_defn ::= c_code.
+initial_defn ::= funcdef.
+initial_defn ::= structdef.
+final_defns ::= final_defns final_defn.
+final_defns ::=.
+final_defn ::= c_code.
+final_defn ::= funcdef.
+final_defn ::= structdef.
+assign ::= ASSIGN variable to string SEMICOLON.
+assign ::= ASSIGN variable subscript to string SEMICOLON.
+assign ::= ASSIGN variable to LBRACE strings RBRACE SEMICOLON.
+assign ::= ASSIGN variable SEMICOLON.
+strings ::= strings COMMA string.
+strings ::= string.
+strings ::=.
+monitor ::= MONITOR variable opt_subscript SEMICOLON.
+monitor ::= MONITOR variable opt_subscript error SEMICOLON.
+sync ::= SYNC variable opt_subscript to event_flag SEMICOLON.
+sync ::= SYNC variable opt_subscript to event_flag error SEMICOLON.
+syncq ::= SYNCQ variable opt_subscript to event_flag syncq_size SEMICOLON.
+syncq ::= SYNCQ variable opt_subscript syncq_size SEMICOLON.
+event_flag ::= NAME.
+variable ::= NAME.
+syncq_size ::= INTCON.
+syncq_size ::=.
+opt_subscript ::= subscript.
+opt_subscript ::=.
+subscript ::= LBRACKET INTCON RBRACKET.
+declaration ::= basetype init_declarators SEMICOLON.
+init_declarators ::= init_declarator.
+init_declarators ::= init_declarators COMMA init_declarator.
+init_declarator ::= declarator.
+init_declarator ::= declarator EQUAL init_expr.
+declarator ::= variable.
+declarator ::= declarator subscript. [POST]
+declarator ::= declarator LPAREN param_decls RPAREN. [POST]
+declarator ::= LPAREN declarator RPAREN. [PRE]
+declarator ::= ASTERISK declarator. [PRE]
+declarator ::= CONST declarator. [PRE]
+param_decls ::=.
+param_decls ::= param_decl.
+param_decls ::= param_decls COMMA param_decl.
+param_decl ::= basetype declarator.
+param_decl ::= type_expr.
+declaration ::= FOREIGN variables SEMICOLON.
+variables ::= variable.
+variables ::= variables COMMA variable.
+init_expr ::= LPAREN type_expr RPAREN LBRACE init_exprs RBRACE.
+init_expr ::= LBRACE init_exprs RBRACE.
+init_expr ::= expr.
+init_exprs ::= init_exprs COMMA init_expr.
+init_exprs ::= init_expr.
+init_exprs ::=.
+prim_type ::= CHAR.
+prim_type ::= SHORT.
+prim_type ::= INT.
+prim_type ::= LONG.
+prim_type ::= UNSIGNED CHAR.
+prim_type ::= UNSIGNED SHORT.
+prim_type ::= UNSIGNED INT.
+prim_type ::= UNSIGNED LONG.
+prim_type ::= INT8T.
+prim_type ::= UINT8T.
+prim_type ::= INT16T.
+prim_type ::= UINT16T.
+prim_type ::= INT32T.
+prim_type ::= UINT32T.
+prim_type ::= FLOAT.
+prim_type ::= DOUBLE.
+prim_type ::= STRING.
+basetype ::= prim_type.
+basetype ::= EVFLAG.
+basetype ::= VOID.
+basetype ::= ENUM NAME.
+basetype ::= STRUCT NAME.
+basetype ::= UNION NAME.
+basetype ::= TYPENAME NAME.
+type_expr ::= basetype.
+type_expr ::= basetype abs_decl.
+abs_decl ::= LPAREN abs_decl RPAREN.
+abs_decl ::= ASTERISK. [PRE]
+abs_decl ::= ASTERISK abs_decl. [PRE]
+abs_decl ::= CONST. [PRE]
+abs_decl ::= CONST abs_decl. [PRE]
+abs_decl ::= subscript. [POST]
+abs_decl ::= abs_decl subscript. [POST]
+abs_decl ::= LPAREN param_decls RPAREN. [POST]
+abs_decl ::= abs_decl LPAREN param_decls RPAREN. [POST]
+option ::= OPTION option_value NAME SEMICOLON.
+option_value ::= ADD.
+option_value ::= SUB.
+state_sets ::= state_sets state_set.
+state_sets ::= state_set.
+state_set ::= SS NAME LBRACE ss_defns states RBRACE.
+ss_defns ::= ss_defns ss_defn.
+ss_defns ::=.
+ss_defn ::= assign.
+ss_defn ::= monitor.
+ss_defn ::= sync.
+ss_defn ::= syncq.
+ss_defn ::= declaration.
+states ::= states state.
+states ::= state.
+state ::= STATE NAME LBRACE state_defns entry transitions exit RBRACE.
+state_defns ::= state_defns state_defn.
+state_defns ::=.
+state_defn ::= assign.
+state_defn ::= monitor.
+state_defn ::= sync.
+state_defn ::= syncq.
+state_defn ::= declaration.
+state_defn ::= option.
+entry ::= ENTRY block.
+entry ::=.
+exit ::= EXIT block.
+exit ::=.
+transitions ::= transitions transition.
+transitions ::= transition.
+transition ::= WHEN LPAREN condition RPAREN block STATE NAME.
+transition ::= WHEN LPAREN condition RPAREN block EXIT.
+transition ::= WHEN LPAREN condition RPAREN block error.
+condition ::= opt_expr.
+block ::= LBRACE block_defns statements RBRACE.
+block_defns ::= block_defns block_defn.
+block_defns ::=.
+block_defn ::= declaration.
+block_defn ::= c_code.
+statements ::= statements statement.
+statements ::=.
+statement ::= BREAK SEMICOLON.
+statement ::= CONTINUE SEMICOLON.
+statement ::= RETURN opt_expr SEMICOLON.
+statement ::= STATE NAME SEMICOLON.
+statement ::= c_code.
+statement ::= block.
+statement ::= IF LPAREN comma_expr RPAREN statement.
+statement ::= IF LPAREN comma_expr RPAREN statement ELSE statement.
+statement ::= WHILE LPAREN comma_expr RPAREN statement.
+statement ::= for_statement.
+statement ::= opt_expr SEMICOLON.
+for_statement ::= FOR LPAREN opt_expr SEMICOLON opt_expr SEMICOLON opt_expr RPAREN statement.
+expr ::= INTCON.
+expr ::= FPCON.
+expr ::= string.
+expr ::= variable.
+expr ::= LPAREN comma_expr RPAREN.
+expr ::= expr LPAREN args RPAREN.
+expr ::= EXIT LPAREN args RPAREN.
+expr ::= SIZEOF LPAREN type_expr RPAREN.
+expr ::= expr LBRACKET expr RBRACKET.
+expr ::= expr PERIOD member.
+expr ::= expr POINTER member.
+expr ::= expr INCR. [POST]
+expr ::= expr DECR. [POST]
+expr ::= ADD expr. [PRE]
+expr ::= SUB expr. [PRE]
+expr ::= ASTERISK expr. [PRE]
+expr ::= AMPERSAND expr. [PRE]
+expr ::= NOT expr. [PRE]
+expr ::= TILDE expr. [PRE]
+expr ::= INCR expr. [PRE]
+expr ::= DECR expr. [PRE]
+expr ::= SIZEOF expr. [PRE]
+expr ::= LPAREN type_expr RPAREN expr. [PRE]
+expr ::= expr SUB expr.
+expr ::= expr ADD expr.
+expr ::= expr ASTERISK expr.
+expr ::= expr SLASH expr.
+expr ::= expr GT expr.
+expr ::= expr GE expr.
+expr ::= expr EQ expr.
+expr ::= expr NE expr.
+expr ::= expr LE expr.
+expr ::= expr LT expr.
+expr ::= expr OROR expr.
+expr ::= expr ANDAND expr.
+expr ::= expr LSHIFT expr.
+expr ::= expr RSHIFT expr.
+expr ::= expr VBAR expr.
+expr ::= expr CARET expr.
+expr ::= expr AMPERSAND expr.
+expr ::= expr MOD expr.
+expr ::= expr QUESTION expr COLON expr.
+expr ::= expr EQUAL expr.
+expr ::= expr ADDEQ expr.
+expr ::= expr SUBEQ expr.
+expr ::= expr ANDEQ expr.
+expr ::= expr OREQ expr.
+expr ::= expr DIVEQ expr.
+expr ::= expr MULEQ expr.
+expr ::= expr MODEQ expr.
+expr ::= expr LSHEQ expr.
+expr ::= expr RSHEQ expr.
+expr ::= expr XOREQ expr.
+comma_expr ::= comma_expr COMMA expr.
+comma_expr ::= expr.
+opt_expr ::= comma_expr.
+opt_expr ::=.
+args ::= args COMMA expr.
+args ::= expr.
+args ::=.
+string ::= STRCON.
+member ::= NAME.
+funcdef ::= basetype declarator block.
+structdef ::= STRUCT NAME members SEMICOLON.
+members ::= LBRACE member_decls RBRACE.
+member_decls ::= member_decl.
+member_decls ::= member_decls member_decl.
+member_decl ::= basetype declarator SEMICOLON.
+member_decl ::= c_code.
+c_code ::= CCODE.
+to ::= TO.
+to ::=.

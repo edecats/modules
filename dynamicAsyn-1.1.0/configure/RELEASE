@@ -1,0 +1,10 @@
+# RELEASE - Location of external support modules
+#
+# Required external module paths:
+# ASYN - asynDriver
+# EPICS_BASE - EPICS base
+ASYN=$(MODULES)/asyn
+
+# External modules are expected to be defined in a RELEASE file located
+# in $(TOP)'s parent directory.
+-include $(TOP)/../RELEASE.local

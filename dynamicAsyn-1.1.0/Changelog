@@ -1,0 +1,16 @@
+# Changelog
+
+## [1.1.0] - 2020-11-11
+### Changed
+- Asyn reason format changed to match EPICS ADS v2.0.0.
+- configure/RELEASE includes external support module paths from $(TOP)'s parent
+  directory.
+
+## [1.0.2] - 2019-03-18
+### Fixed
+- Fixed: Segmentation fault would occur durign reasonTest IOC startup on _some_
+  machines. Starting the IOC using jemalloc with MALLOC_CONFIG="junk:true" also
+  triggered the segfault. [Issue #1 @ Gitlab]
+
+### Changes
+- Removed unused or duplicate variables from configure/RELEASE.

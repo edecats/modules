@@ -1,0 +1,2 @@
+PCRE_INCLUDE=/usr/include
+PCRE_LIB=/usr/lib64

@@ -1,0 +1,12 @@
+O.*/
+bin/
+db/
+dbd/
+lib/
+adsSup/obj
+adsSup/*.so
+*.swp
+~$*
+
+# Ignore only <top>/doc/ directory. The point is not to ignore xxxApp/src/doc/.
+/doc/

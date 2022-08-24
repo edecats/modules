@@ -1,0 +1,14 @@
+EPICS ADS Device Support
+
+
+This device support library is used for communication with Beckhoff ADS devices.
+It implements the layer between Beckhoff ADS client library and EPICS database
+records. The library handles read/write requests initiated by database records
+and converts them to ADS client library calls.
+
+More information can be found in the EPICS ADS Reference Manual and Architecture
+documents, located in this repository: adsApp/src/doc/
+
+Beckhoff ADS client library commit: 6b3a030
+
+Requires DynamicAsynPortDriver v1.1.0.

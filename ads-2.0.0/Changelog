@@ -1,0 +1,23 @@
+# Changelog
+
+## [2.0.0] - 2020-11-11
+### Changed
+- configure/RELEASE includes external support module paths from $(TOP)'s parent
+  directory.
+- Update Beckhoff ADS library (https://github.com/Beckhoff/ADS) to upstream
+  Git commit 6b3a030 (2019-09-05). Changes made in Makefile for EPICS build
+  chain compatibility:
+  * LIB_NAME: added "lib" prefix
+  * CXXFLAGS: added -fPIC
+  * Added "install" target, which calls the existing "all" target.
+  * Added "realclean" target, which calls the existing "clean" target.
+- Remove 'notify_delay' parameter in AdsOpen iocsh function.
+- Introduce 'sum_buffer_nelem' parameter in AdsOpen iocsh function, in place
+of 'notify_delay'. The parameter defaults to 500 and specifies how many
+elements are allowed in a single ADS sum-read buffer.
+- ADS sum-read command are now used to read ADS variables. Writing to ADS
+  variables and resolving handles is still done individually for each
+  variable, i.e. without using ADS sum commands
+
+### Removed
+- Support for ADS notification mechanism.
